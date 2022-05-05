@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel | Log page</title>
+</head>
+<body>
+    <h1>Server logs</h1>
+    
+    <div>
+        {% for entry in result %}
+            {% for key, value in entry.items() %}
+                <div>
+                    <span style="font-weight: bold; text-transform: capitalize;"> {{ key }}: </span>
+                    <span> {{ value }} </span>
+                </div>
+                
+            {% endfor %}
+            ----
+            
+        {% endfor %}
+   
+            </div>
+
+</body>
+</html>

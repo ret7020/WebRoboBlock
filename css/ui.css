@@ -48,7 +48,7 @@ main {
   height: 100%;
   padding: 10px;
   box-sizing: border-box;
-
+  background-size: 100%;
 
 }
 
@@ -91,4 +91,9 @@ textarea{
   color: black;
   cursor: pointer;
 
+}
+
+#watermark { position: fixed; bottom: 0; right: 0; z-index:999; margin-bottom: 30px; margin-right: 10px; font-family: Arial, Helvetica, sans-serif;}
+#watermark > h3{
+  font-family: Arial, Helvetica, sans-serif; 
 }

@@ -41,6 +41,7 @@ const vm = {
           }else if (temp_block_dt[0] == "multiple"){
             $.each(temp_block_dt[1], function(index, val){
                 json_compiled.push(val);
+                
               });
           }
         }

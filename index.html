@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>This is NOT Scratch</title>
@@ -7,10 +8,11 @@
   <link rel="stylesheet" href="css/ui.css">
   <link rel="stylesheet" href="css/blocks.css">
   <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script> 
+  <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
   <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.dark-mode.css>
   <link rel="stylesheet" href="css/modal.css">
 </head>
+
 <body>
   <nav id="menu" class="panel">
     <div class="panel-toolbar">
@@ -19,24 +21,17 @@
     <div id="menu-contents" class="panel-contents"></div>
   </nav>
   <main>
-    <div id="code" class="panel">  
+    <div id="code" class="panel">
       <div class="panel-toolbar">
         Actions chain
         <div class="panel-toolbar">
-          <ion-icon id="load_project" name="cloud-upload-outline"
-                    class="icon">
-
+          <ion-icon id="load_project" name="cloud-upload-outline" class="icon">
           </ion-icon>
-          <ion-icon id="trash"
-                    onclick="purgeOnConfirm()"
-                    name="trash-outline"
-                    ondragover="removeDragOver(event)"
-                    ondrop="removeDrop(event)"
-                    class="icon icon-small">
+          <ion-icon name="push-outline" class="icon" onclick="send_ajax()"></ion-icon>
+          <ion-icon id="trash" onclick="purgeOnConfirm()" name="trash-outline" ondragover="removeDragOver(event)"
+            ondrop="removeDrop(event)" class="icon">
           </ion-icon>
-          <ion-icon onclick="run()"
-                    name="caret-forward-circle-outline" 
-                    class="icon">
+          <ion-icon onclick="run()" name="caret-forward-circle-outline" class="icon">
           </ion-icon>
         </div>
       </div>
@@ -47,14 +42,12 @@
         JSON:
       </div>
       <div class="json_source"></div>
-      <a class="download_json" style="display:none" onclick="downloadObjectAsJson()" >Download json file</a>
+      <a class="download_json" style="display:none" onclick="downloadObjectAsJson()">Download json file</a>
       <span class="raw_json" style="display: none;"></span>
     </div>
   </main>
 
   <div id="myModal" class="modal">
-
-    <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times</span>
       <h2>Load project</h2>
@@ -63,22 +56,32 @@
       <button class="load_json" onclick="load_project()">Load</button>
 
     </div>
-  
+
   </div>
-  
+  <div id="watermark" style="display: none;">
+    <h3>Активация Windows</h3>
+    Чтобы активировать Windows, перейдите в<br>
+    раздел "Параметры".
+  </div>
 
-
-  
   <script src="js/drag.js"></script>
   <script src="js/blocks.js"></script>
   <script src="js/blocks_data.js"></script>
   <script src="js/vm.js"></script>
   <script src="js/blks.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.min.js></script>
   <script src="js/save_load.js"></script>
+  <script src="js/backend_integration.js"></script>
+
+  <!-- Fun; Check OS-->
+  <script>
+    if (!window.navigator.platform.includes("Linux")){
+      console.log("Win");
+      $("#watermark").css("display", "block");
+    }
+  </script>
 </body>
+
 </html>

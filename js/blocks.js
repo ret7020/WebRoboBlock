@@ -108,5 +108,6 @@ function createBlock(cmd, opts) {
 function addBlocks(container, cmds) {
   for (const [cmd, opts] of Object.entries(cmds)) {
     container.appendChild(createBlock(cmd, opts));
+    
   }
 }

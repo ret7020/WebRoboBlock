@@ -76,3 +76,19 @@ main {
    text-decoration: underline;
    cursor: pointer;
 }
+
+textarea{
+  background: rgba(var(--panel-bg), 0.25);
+  border: none;
+  width: 100%;
+}
+.load_json{
+  border: 0;
+  background: rgb(14, 190, 255);
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 10px;
+  color: black;
+  cursor: pointer;
+
+}

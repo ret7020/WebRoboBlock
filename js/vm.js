@@ -49,6 +49,7 @@ const vm = {
     $(".json_source").html(prettyPrintJson.toHtml(json_compiled));
     $(".download_json").css("display", "block");
     $(".raw_json").html(JSON.stringify(json_compiled));
+    
     return json_compiled;
   },
   run(block) {
@@ -69,12 +70,14 @@ const vm = {
       }
       
     }
+    
       if (cmd != "repeat"){
         return ["single", {"action": cmd, "data": args[0]}];
       }else{
         var final_iter = this.cmds[cmd].run(this, ...args);
         return ["multiple", final_iter];
       }
+      
       
     //console.log(this.cmds); FOR SAVING IN FUTURE
    

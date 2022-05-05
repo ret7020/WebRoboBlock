@@ -15,10 +15,7 @@ const vm = {
   plugins: [],
  
   
-  init(canvas) {
-    //this.initCanvas(canvas);
-    //this.initPlugins();
-  },
+  init(canvas) {},
 
 
   initPlugins() {
@@ -34,34 +31,53 @@ const vm = {
     
   runSeq(blocks) {
     var json_compiled = [];
+    var temp_block_dt;
     for (const block of blocks) {
       if (block.hasAttribute('data-cmd')) {
-        json_compiled.push(this.run(block));
+        temp_block_dt = this.run(block);
+        if (temp_block_dt != null){
+          if (temp_block_dt[0] == "single"){
+            json_compiled.push(temp_block_dt[1]);
+          }else if (temp_block_dt[0] == "multiple"){
+            $.each(temp_block_dt[1], function(index, val){
+                json_compiled.push(val);
+              });
+          }
+        }
       }     
     }
     $(".json_source").html(prettyPrintJson.toHtml(json_compiled));
     $(".download_json").css("display", "block");
-    $(".raw_json").html(JSON.stringify(json_compiled))
-
-    //downloadObjectAsJson(json_compiled, "source");
-
+    $(".raw_json").html(JSON.stringify(json_compiled));
+    return json_compiled;
   },
   run(block) {
     const cmd = block.getAttribute('data-cmd');
     const params = this.cmds[cmd].params || [];
     const args = [];
-    //var json_compiled = [];
 
     for (const param of params) {
       const elem = block.querySelector(`[data-param-id="${param.id}"]`)
+      
       switch (param.type) {
         case 'input':
           args.push(param.conv(elem.value));
-          return {"action": cmd, "data": elem.value};
-          
+          break;
+        case 'slot':
+            args.push(childBlocks(elem)); 
+            break;
       }
+      
     }
+      if (cmd != "repeat"){
+        return ["single", {"action": cmd, "data": args[0]}];
+      }else{
+        var final_iter = this.cmds[cmd].run(this, ...args);
+        return ["multiple", final_iter];
+      }
+      
     //console.log(this.cmds); FOR SAVING IN FUTURE
-    //this.cmds[cmd].run(this, ...args);
+   
+    
   }
 };

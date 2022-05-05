@@ -25,10 +25,15 @@ const logo = {
           type: 'slot',
         }
       ],
-      run(vm, times, blocks) {
+      run(vm, times, blocks) {        
+        var final_iter = [];
         for (let i = 0; i < times; i++) { 
-          vm.runSeq(blocks); 
+          $.each(vm.runSeq(blocks), function(index, val){
+            final_iter.push(val);
+          });
+          
         }
+        return final_iter;
       },
     },
 

@@ -64,6 +64,8 @@
     раздел "Параметры".
   </div>
 
+  
+
   <script src="js/drag.js"></script>
   <script src="js/blocks.js"></script>
   <script src="js/blocks_data.js"></script>
@@ -77,11 +79,20 @@
 
   <!-- Fun; Check OS-->
   <script>
-    if (!window.navigator.platform.includes("Linux")){
-      console.log("Win");
-      $("#watermark").css("display", "block");
+    function check(){
+        console.log("Checking OS");
+        if (!window.navigator.platform.includes("Linux")){
+          console.log("Win");
+          $("#watermark").css("display", "block");
+      }
     }
+      window.addEventListener('load', function () {
+        check();
+        });
+    
+    
   </script>
+  
 </body>
 
 </html>

@@ -9,10 +9,9 @@
   <link rel="stylesheet" href="css/blocks.css">
   <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
-  <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.dark-mode.css>
   <link rel="stylesheet" href="css/modal.css">
+  
 </head>
-
 <body>
   <nav id="menu" class="panel">
     <div class="panel-toolbar">
@@ -76,6 +75,10 @@
   <script src=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.min.js></script>
   <script src="js/save_load.js"></script>
   <script src="js/backend_integration.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.dark-mode.css>
+  
 
   <!-- Fun; Check OS-->
   <script>
@@ -83,13 +86,13 @@
         console.log("Checking OS");
         if (!window.navigator.platform.includes("Linux")){
           console.log("Win");
+          toastr.warning('Please activate your Windows 10 copy!');
           $("#watermark").css("display", "block");
       }
     }
       window.addEventListener('load', function () {
         check();
         });
-    
     
   </script>
   

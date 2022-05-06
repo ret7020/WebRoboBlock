@@ -1,6 +1,7 @@
 {
-	"socket_port": "9999",
+	"socket_port": 9999,
 	"listen_from": "",
-	"user": "test_user",
-	"password": "1223334444"
+	"clients_limit": 10, 
+	"user": "test",
+	"password": "1234"
 }

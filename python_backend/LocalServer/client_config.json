@@ -1,7 +1,7 @@
 {
-     "rpi_host": "192.168.0.10",
+     "rpi_host": "localhost",
      "rpi_port": "9999",
-     "rpi_socket_user": "test_user",
-     "rpi_socket_password": "1223334444"
+     "rpi_socket_user": "test",
+     "rpi_socket_password": "1234"
 }
 

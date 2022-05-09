@@ -9,11 +9,11 @@ class RPI:
         self.user_name = user_name
         self.password = password
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print(self.port)
-        self.connect()
+        self.connected = False
     
     def connect(self):
         self.sock.connect((self.host, self.port))
+        self.connected = True
 
     def send(self, data):
         dict_final = {"user": self.user_name, "pass": self.password, "data": data}

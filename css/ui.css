@@ -97,3 +97,81 @@ textarea{
 #watermark > h3{
   font-family: Arial, Helvetica, sans-serif; 
 }
+
+.languagepicker {
+	background-color: #FFF;
+	display: inline-block;
+	padding: 0;
+	height: 40px;
+	overflow: hidden;
+	transition: all .3s ease;
+	margin: 0 50px 10px 0;
+	vertical-align: top;
+	float: left;
+}
+
+.languagepicker:hover {
+	/* don't forget the 1px border */
+	height: 81px;
+}
+
+.languagepicker a{
+	color: #000;
+	text-decoration: none;
+}
+
+.languagepicker li {
+	display: block;
+	background: transparent;
+	
+	padding: 0px 20px;
+	line-height: 40px;
+	border-top: 1px solid #EEE;
+}
+
+.languagepicker li:hover{
+	background-color: #EEE;
+}
+
+.languagepicker a:first-child li {
+	border: none;
+	background: transparent;
+}
+
+.languagepicker li img {
+	margin-right: 5px;
+}
+
+.roundborders {
+	border-radius: 5px;
+}
+
+.large:hover {
+	/* 
+	don't forget the 1px border!
+	The first language is 40px heigh, 
+	the others are 41px
+	*/
+	height: 245px;
+}
+
+.setting_link{
+  text-decoration: underline;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.setting_link:hover{
+  color: #4f4f4f;
+}
+
+.flask_addr{
+  display: flex;
+}
+.flask_addr_input{
+  width: 100px;
+}
+
+.flask_addr_input:focus{
+  width: 100px;
+}

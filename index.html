@@ -3,15 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>This is NOT Scratch</title>
+  <title>RoboBlock v.1.0.0 [DEV]</title>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/ui.css">
   <link rel="stylesheet" href="css/blocks.css">
   <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
   <link rel="stylesheet" href="css/modal.css">
-  
+  <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+
 </head>
+
 <body>
   <nav id="menu" class="panel">
     <div class="panel-toolbar">
@@ -24,6 +26,7 @@
       <div class="panel-toolbar">
         Actions chain
         <div class="panel-toolbar">
+          <ion-icon id="settings" name="settings-outline" class="icon"></ion-icon>
           <ion-icon id="load_project" name="cloud-upload-outline" class="icon">
           </ion-icon>
           <ion-icon name="push-outline" class="icon" onclick="send_ajax()"></ion-icon>
@@ -48,7 +51,7 @@
 
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times</span>
+      <span id="close_modal" class="close">&times</span>
       <h2>Load project</h2>
       <p>Insert JSON file content:</p>
       <textarea class="json_content" cols="30" rows="10"></textarea>
@@ -57,13 +60,33 @@
     </div>
 
   </div>
+
+
+  <div id="settinsgModal" class="modal">
+    <div class="modal-content">
+      <span id="close_settings" class="close">&times</span>
+      <h2>RoboBlock settings</h2>
+      <p>Language: <a class="setting_link">EN</a> <a class="setting_link">RU</a>
+      </p>
+      <div class="flask_addr">
+        <p>Flask addr(IP:PORT): </p>
+        <input type="text" class="flask_addr_input" value="127.0.0.1:5000" autocomplete="off">
+      </div>
+      <p>Theme: <a class="setting_link">Dark</a> <a class="setting_link" onclick="change_theme()">Light</a>
+      </p>
+
+
+    </div>
+
+  </div>
+
   <div id="watermark" style="display: none;">
     <h3>Активация Windows</h3>
     Чтобы активировать Windows, перейдите в<br>
     раздел "Параметры".
   </div>
 
-  
+
 
   <script src="js/drag.js"></script>
   <script src="js/blocks.js"></script>
@@ -78,24 +101,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.dark-mode.css>
-  
+  <script src="js/themes.js"></script>
 
   <!-- Fun; Check OS-->
   <script>
-    function check(){
-        console.log("Checking OS");
-        if (!window.navigator.platform.includes("Linux")){
-          console.log("Win");
-          toastr.warning('Please activate your Windows 10 copy!');
-          $("#watermark").css("display", "block");
+    function check() {
+      console.log("Checking OS");
+      if (!window.navigator.platform.includes("Linux")) {
+        console.log("Win");
+        toastr.warning('Please activate your Windows 10 copy!');
+        $("#watermark").css("display", "block");
       }
     }
-      window.addEventListener('load', function () {
-        check();
-        });
-    
+    window.addEventListener('load', function () {
+      check();
+    });
+
   </script>
-  
+
 </body>
 
 </html>

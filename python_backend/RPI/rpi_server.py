@@ -81,4 +81,5 @@ if __name__ == "__main__":
     logger = Logger()
     motors = MotorsApi()
     server = Server(CONFIG['listen_from'], int(CONFIG['socket_port']), CONFIG['clients_limit'])
+    print("Started. Check more info in log")
     server.connections_listener()

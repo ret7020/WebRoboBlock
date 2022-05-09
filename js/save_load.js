@@ -16,7 +16,7 @@ function load_project(json_compiled_string){
 
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("load_project");
-var span = document.getElementsByClassName("close")[0]; 
+var span = document.getElementById("close_modal");
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -26,5 +26,21 @@ span.onclick = function() {
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+  }
+}
+
+
+var modal_settings = document.getElementById("settinsgModal");
+var btn = document.getElementById("settings");
+var span = document.getElementById("close_settings");
+btn.onclick = function() {
+  modal_settings.style.display = "block";
+}
+span.onclick = function() {
+  modal_settings.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal_settings) {
+    modal_settings.style.display = "none";
   }
 }

@@ -37,11 +37,17 @@ const vm = {
         temp_block_dt = this.run(block);
         if (temp_block_dt != null){
           if (temp_block_dt[0] == "single"){
-            json_compiled.push(temp_block_dt[1]);
+            var el = {};
+            el["action"] = temp_block_dt[1]["action"];
+            $.each(temp_block_dt[1]["data"], function(index, val){
+                $.each(val, function(index, val){
+                    el[index] = val;
+                });
+            });
+            json_compiled.push(el);
           }else if (temp_block_dt[0] == "multiple"){
             $.each(temp_block_dt[1], function(index, val){
-                json_compiled.push(val);
-                
+                json_compiled.push(val);  
               });
           }
         }
@@ -57,13 +63,17 @@ const vm = {
     const cmd = block.getAttribute('data-cmd');
     const params = this.cmds[cmd].params || [];
     const args = [];
+    const params_names = [];
 
     for (const param of params) {
       const elem = block.querySelector(`[data-param-id="${param.id}"]`)
-      
       switch (param.type) {
         case 'input':
           args.push(param.conv(elem.value));
+          var array_dt = {};
+          array_dt[param.id] =param.conv(elem.value)
+          params_names.push(array_dt);
+          
           break;
         case 'slot':
             args.push(childBlocks(elem)); 
@@ -73,7 +83,7 @@ const vm = {
     }
     
       if (cmd != "repeat"){
-        return ["single", {"action": cmd, "data": args[0]}];
+        return ["single", {"action": cmd, "data": params_names}];
       }else{
         var final_iter = this.cmds[cmd].run(this, ...args);
         return ["multiple", final_iter];

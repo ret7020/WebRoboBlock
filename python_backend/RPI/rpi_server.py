@@ -27,7 +27,10 @@ class MotorsApi:
     def drive(self, data):
         logger.write_entry("Starting driving", sender="MOTORS_API")
         for step in data:
-            print(step["action"], step["data"])
+            if step["action"] in ["forward", "backward"]:
+                print(step["action"], step["distance"], step["speed"])
+            elif step["action"] in ["right", "left"]:
+                print(step["action"], step["angle"], step["speed"])
 
 
 

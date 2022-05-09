@@ -47,6 +47,14 @@ const logo = {
           label: 'Forward',
           val: 10,
           suffix: 'steps',
+        },
+        {
+          id: 'speed',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Speed',
+          val: 1000,
+          suffix: '',
         }
       ],
       run(vm, distance) {
@@ -74,6 +82,14 @@ const logo = {
           label: 'Backward',
           val: 10,
           suffix: 'steps',
+        },
+        {
+          id: 'speed',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Speed',
+          val: 1000,
+          suffix: '',
         }
       ],
       run(vm, distance) {
@@ -91,6 +107,14 @@ const logo = {
           label: 'Rotate left',
           val: 90,
           suffix: '°',
+        },
+        {
+          id: 'speed',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Speed',
+          val: 1000,
+          suffix: '',
         }
       ],
       run(vm, angle) {
@@ -108,11 +132,22 @@ const logo = {
           label: 'Rotate right',
           val: 90,
           suffix: '°',
+        },
+        {
+          id: 'speed',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Speed',
+          val: 1000,
+          suffix: '',
         }
       ],
       run(vm, angle) {
         vm.env.direction -= angle;
       }
     },
+
+    
+
  }
 };

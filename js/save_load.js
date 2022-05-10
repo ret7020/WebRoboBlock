@@ -14,6 +14,22 @@ function load_project(json_compiled_string){
     
 }
 
+function export_as_html(){
+  var source = $("#code-contents").clone();
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(source));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", "project.html");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
+function import_project(json_prj_string){
+  var obj = JSON.parse(json_prj_string);
+  $("#code-contents").html(obj);
+}
+
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("load_project");
 var span = document.getElementById("close_modal");
@@ -22,11 +38,6 @@ btn.onclick = function() {
 }
 span.onclick = function() {
   modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
 }
 
 
@@ -40,7 +51,8 @@ span.onclick = function() {
   modal_settings.style.display = "none";
 }
 window.onclick = function(event) {
-  if (event.target == modal_settings) {
+  if (event.target == modal_settings || event.target == modal) {
     modal_settings.style.display = "none";
+    modal.style.display = "none";
   }
 }

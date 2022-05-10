@@ -147,6 +147,31 @@ const logo = {
       }
     },
 
+    threaded_test: {
+      color: 'blue',
+      params: [
+        {
+          id: 'data',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Threading test',
+          val: 90,
+          suffix: 'print',
+        },
+        {
+          id: 'time',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Wait time',
+          val: 5,
+          suffix: 'sec.',
+        }
+      ],
+      run(vm, angle) {
+        vm.env.direction -= angle;
+      }
+    },
+
     
 
  }

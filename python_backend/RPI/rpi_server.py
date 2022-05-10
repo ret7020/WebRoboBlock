@@ -19,20 +19,41 @@ class Logger:
         
 
 
+class MotorsAPI:
+    def __init__(self):
+        self.rotate_coef = 40 #taken from the bullshit
 
-class MotorsApi:
+    def drive(self, step):
+        action = step["action"]
+        speed = step["speed"]
+        if step["action"] in ["forward", "backward"]:
+            print(step["action"], step["distance"], step["speed"])
+            steps_cnt = step["distance"]
+        elif step["action"] in ["right", "left"]:
+            steps_cnt = step["angle"] * self.rotate_coef
+
+        print(action, steps_cnt, speed) #Send it to lib
+        
+        #time.sleep(0.5) #Fake wait to simulate real behaviour
+
+
+class ControllerAPI:
     def __init__(self):
         pass
 
-    def drive(self, data):
-        logger.write_entry("Starting driving", sender="MOTORS_API")
+    def thread_block_test(self, data, time_wait):
+        for _ in range(20):
+            print(f"Thread - {data}")
+            time.sleep(time_wait)
+
+    def execute(self, data):
+        logger.write_entry("Starting executing step by step", sender="CONTROLLER_API")
         for step in data:
-            if step["action"] in ["forward", "backward"]:
-                print(step["action"], step["distance"], step["speed"])
-            elif step["action"] in ["right", "left"]:
-                print(step["action"], step["angle"], step["speed"])
-
-
+            if step["action"] in ["forward", "backward", "left", "right"]:
+                motors.drive(step)
+            elif step["action"].startswith("threaded_"):
+                threading.Thread(target=self.thread_block_test, args=(step["data"], step["time"], )).start()
+        print("------")
 
 class ClientThread:
     def __init__(self, connection):
@@ -55,7 +76,7 @@ class ClientThread:
                         data = data["data"]
                         if isinstance(data, list):
                             #Don't block listen thread
-                            threading.Thread(target=motors.drive, args=(data, )).start()
+                            threading.Thread(target=controller.execute, args=(data, )).start()
                         else:
                             logger.write_entry("Data packet type != list", sender="CLIENT_THREAD")
                     else: 
@@ -82,7 +103,8 @@ class Server:
 
 if __name__ == "__main__":
     logger = Logger()
-    motors = MotorsApi()
+    controller = ControllerAPI()
+    motors = MotorsAPI()
     server = Server(CONFIG['listen_from'], int(CONFIG['socket_port']), CONFIG['clients_limit'])
     print("Started. Check more info in log")
     server.connections_listener()

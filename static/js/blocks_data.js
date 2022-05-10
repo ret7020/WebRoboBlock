@@ -55,6 +55,22 @@ const logo = {
           label: 'Speed',
           val: 1000,
           suffix: '',
+        },
+	{
+          id: 'sensor_id',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor id',
+          val: -1,
+          suffix: '',
+        },
+	{
+          id: 'sensor_val',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor val',
+          val: 1,
+          suffix: '',
         }
       ],
       run(vm, distance) {
@@ -171,6 +187,29 @@ const logo = {
         vm.env.direction -= angle;
       }
     },
+    
+    init_var: {
+	color: 'red',
+	params: [
+	  {
+	     id: 'var_name',
+	     type: 'input',
+	     conv: parseInt,
+	     label: 'Var name',
+	     val: "var_1",
+	     suffix: ''
+	  },
+	  {
+	     id: "var_value",
+	     type: "input",
+	     conv: parseInt,
+	     label: 'Var value',
+	     
+	  }
+	],
+	run(vm){
+	}
+    }
 
     
 

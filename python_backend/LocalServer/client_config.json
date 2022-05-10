@@ -1,7 +1,0 @@
-{
-     "rpi_host": "192.168.0.186",
-     "rpi_port": "9999",
-     "rpi_socket_user": "test",
-     "rpi_socket_password": "1234"
-}
-

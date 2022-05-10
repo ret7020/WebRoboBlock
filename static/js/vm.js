@@ -69,10 +69,14 @@ const vm = {
       const elem = block.querySelector(`[data-param-id="${param.id}"]`)
       switch (param.type) {
         case 'input':
-          console.log(parseFloat(math.evaluate(elem.value)));
-          args.push(parseFloat(math.evaluate(elem.value)));
+          
+          args.push(elem.value);
           var array_dt = {};
-          array_dt[param.id] =math.evaluate(elem.value);
+	  try{
+          	array_dt[param.id] = math.evaluate(elem.value);
+	  }catch (e){
+		array_dt[param.id] = elem.value;
+	  }
           params_names.push(array_dt);
           
           break;

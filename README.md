@@ -19,7 +19,7 @@ Control RPi robot using scratch-like web interface
     ip a
     ```
 
-3. Open [web interface](http://<YOUR RPI IP>:8080/)
+3. Open web interface located here: <b><i>http://YOUR_RPI_IP:8080/</i></b>
 
 4. Play!
     

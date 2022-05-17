@@ -1,0 +1,5 @@
+pyngrok
+flask
+pyTelegramBotAPI
+opencv-python
+spidev

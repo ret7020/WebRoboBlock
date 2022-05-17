@@ -70,6 +70,8 @@ def run():
     for step in data:
         if step["action"] in ["forward", "backward", "left", "right"]:
             motors.drive(step)
+        elif step["action"] == "servo":
+            spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"])
         elif step["action"].startswith("threaded_"):
             pass
     return "1"

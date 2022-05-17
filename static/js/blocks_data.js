@@ -171,6 +171,49 @@ const logo = {
       }
     },
 
+
+    servo: {
+      color: '#04f986',
+      params: [
+        {
+          id: 'num',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Servo number',
+          val: 0,
+          suffix: '',
+        },
+        {
+          id: 'start_angle',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Start angle',
+          val: 10,
+          suffix: '°',
+        },
+        {
+          id: 'finish_angle',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Finish angle',
+          val: 60,
+          suffix: '°',
+        },
+	      {
+          id: 'delay',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Delay',
+          val: 30,
+          suffix: 's',
+        }
+      ],
+      run(vm, angle) {
+        vm.env.direction -= angle;
+      }
+    },
+
+
     threaded_test: {
       color: 'blue',
       params: [

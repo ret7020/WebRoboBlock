@@ -84,3 +84,9 @@ def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id
     if verbose:
         print(f'Moved {dir}, speed: {speed}, accel: {accel}, steps: {steps}')
         print(f'Received from arduino: {received_data}')
+
+
+def move_servo(servo_num, start_angle, finish_angle, delay):
+    data = [2, servo_num, start_angle, finish_angle, delay]
+    print(data)
+    spi_send(data)

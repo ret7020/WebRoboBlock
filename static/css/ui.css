@@ -175,3 +175,8 @@ textarea{
 .flask_addr_input:focus{
   width: 100px;
 }
+
+.controller_btn{
+  background: #ffffff20; border:none;
+  margin-left: 50px;
+}

@@ -62,6 +62,7 @@ input:focus {
   padding: 0;
 }
 
+
 input[type="color"] {
 	-webkit-appearance: none;
 	height: 16px;

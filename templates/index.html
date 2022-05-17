@@ -59,6 +59,13 @@
         <img id="rpi_camera" src="static/imgs/camera_off.png" width="200" alt="Server error">
       {% endif %}
 
+      <h2>Manual controller</h2>
+      <input type="checkbox" style="width: 3%" name="enabled_status" id="enabled_status"><label for="enabled_status">Enabled</label></br></br>
+      <button class="controller_btn" style="margin-left: 90px" onclick="send_direction('forward', 1000)"><ion-icon name="caret-up-outline" class="icon"></ion-icon></button></br>
+      <button class="controller_btn" onclick="send_direction('left', 90)"><ion-icon name="caret-back-outline" class="icon"></ion-icon></button>
+      <button class="controller_btn" style="margin-left: 32px" onclick="send_direction('right', 90)"><ion-icon name="caret-forward-outline" class="icon"></ion-icon></button>
+      <button class="controller_btn" style="margin-left: -88px;" onclick="send_direction('forward', -1000)"><ion-icon name="caret-down-outline" class="icon"></ion-icon></button>
+
     </div>
     
 
@@ -83,7 +90,6 @@
       <h2>RoboBlock settings</h2>
       <p>Language: <a class="setting_link">EN</a> <a class="setting_link">RU</a>
       </p>
-
       <p>Theme: <a class="setting_link">Dark</a> <a class="setting_link" onclick="change_theme()">Light</a>
       </p>
 
@@ -92,11 +98,7 @@
 
   </div>
 
-  <div id="watermark" style="display: none;">
-    <h3>Активация Windows</h3>
-    Чтобы активировать Windows, перейдите в<br>
-    раздел "Параметры".
-  </div>
+  
 
 
 
@@ -116,22 +118,11 @@
   <script src="/static/js/themes.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.5.2/math.js"></script>
   <script src="/static/js/camera.js"></script>
+  <script src="/static/js/controller.js"></script>
 
   <!-- Fun; Check OS-->
   <script>
-    function check() {
-      console.log("Checking OS");
-      if (!window.navigator.platform.includes("Linux")) {
-        console.log("Win");
-        toastr.warning('Please activate your Windows 10 copy!');
-        $("#watermark").css("display", "block");
-      }
-    }
-    window.addEventListener('load', function () {
-      check();
-
-
-    });
+     $("#watermark").css("display", "block");
 
   </script>
 

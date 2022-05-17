@@ -34,6 +34,7 @@ class MotorsAPI:
         self.rotate_coef = 40 #taken from the bullshit
 
     def drive(self, step):
+        print(step)
         action = step["action"]
         speed = step["speed"]
         if "sensor_id" in step:

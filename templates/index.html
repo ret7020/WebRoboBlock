@@ -53,7 +53,7 @@
       <div class="panel-toolbar" id="camera_shot_title">
         Camera Screenshot {% if not camera %} disabled in server config{% endif %}
       </div>
-      <img src="{{ url_for('video_feed1') }}">
+      <img src="{{ url_for('video_feed1') }}" width="500">
 
       <h2>Manual controller</h2>
       <input type="checkbox" style="width: 3%" name="enabled_status" id="enabled_status"><label for="enabled_status">Enabled</label></br></br>
@@ -63,7 +63,7 @@
       <button class="controller_btn" style="margin-left: -88px;" onclick="send_direction('forward', -1000)"><ion-icon name="caret-down-outline" class="icon"></ion-icon></button>
 
     </div>
-    
+
 
   </main>
 

@@ -4,7 +4,7 @@ import spilib
 import telebot
 import json
 import socket
-
+from custom_python.py_classes import *
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
@@ -72,6 +72,8 @@ def run():
             motors.drive(step)
         elif step["action"] == "servo":
             spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"])
+        elif step["action"] == "python":
+            eval(step["source"])
         elif step["action"].startswith("threaded_"):
             pass
     return "1"

@@ -75,9 +75,12 @@ def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id
     #Freeze app until action finish
     while True:
         recieved = spi_send([])
-        if (recieved[0] == 0 and recieved[1] == 0) or check_sensor(recieved, sensor_id, sensor_val):
-            spi_send([1, 1, 1, 1, 1, 1, 1])
-            print("Finish/stop")
+        if (recieved[0] == 0 and recieved[1] == 0):
+            print("Finish")
+            break
+        if check_sensor(recieved, sensor_id, sensor_val):
+            spi_send([1, 0, 0, 0, 0, 0, 0])
+            print("Stop")
             break
 
 
@@ -88,5 +91,10 @@ def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id
 
 def move_servo(servo_num, start_angle, finish_angle, delay):
     data = [2, servo_num, start_angle, finish_angle, delay]
-    print(data)
     spi_send(data)
+    time.sleep(0.07)
+    while True:
+        recieved = spi_send([])
+        if (recieved[0] == 0 and recieved[1] == 0):
+            print("Finish servo")
+            break

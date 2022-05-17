@@ -238,8 +238,26 @@ const logo = {
         vm.env.direction -= angle;
       }
     },
+    python: {
+      color: 'green',
+      params: [
+        {
+           id: 'source',
+           type: 'input',
+           conv: parseInt,
+           label: 'Code',
+           val: "Test code",
+           suffix: ''
+        },
+       
+      ],
+      run(vm){
+      }
+        },
     
-    init_var: {
+
+
+  init_var: {
 	color: 'red',
 	params: [
 	  {

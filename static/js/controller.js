@@ -19,8 +19,6 @@ function send_direction(direction, steps_cnt, speed=1000){
                 toastr.error("Fail; Check your RPI.");
             }
         });
-    }else{
-        toastr.warning("You do not turn on manual controller mode")
     }
 }
 
@@ -50,9 +48,6 @@ function checkKey(e) {
         if (dir != null){
             send_direction(dir, steps_cnt);
         }
-    }else{
-        toastr.warning("You do not turn on manual controller mode");
     }
-
 
 }

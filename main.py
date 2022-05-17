@@ -4,10 +4,13 @@ import spilib
 import telebot
 import json
 import socket
-import cv2
+
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
+if conf["camera_enabled"]:
+    import cv2
+    
 
 class TgPublish:
     def __init__(self) :
@@ -49,7 +52,6 @@ class MotorsAPI:
             steps_cnt = step["angle"] * self.rotate_coef
         spilib.move_robot(action, speed=speed, steps=steps_cnt, sensor_id=sensor_id, sensor_val=sensor_val)
         
-        #print(action, steps_cnt, speed)
         
 
 app = Flask(__name__)

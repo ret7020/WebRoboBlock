@@ -72,10 +72,11 @@ def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id
 
     received_data = spi_send(send_data)
     time.sleep(0.07)
+    #Freeze app until action finish
     while True:
         recieved = spi_send([])
         if (recieved[0] == 0 and recieved[1] == 0) or check_sensor(recieved, sensor_id, sensor_val):
-            spi_send([0])
+            spi_send([1, 1, 1, 1, 1, 1, 1])
             print("Finish/stop")
             break
 

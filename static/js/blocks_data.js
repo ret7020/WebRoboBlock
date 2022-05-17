@@ -56,7 +56,7 @@ const logo = {
           val: 1000,
           suffix: '',
         },
-	{
+	      {
           id: 'sensor_id',
           type: 'input',
           conv: parseFloat,
@@ -64,7 +64,7 @@ const logo = {
           val: -1,
           suffix: '',
         },
-	{
+	      {
           id: 'sensor_val',
           type: 'input',
           conv: parseFloat,
@@ -107,6 +107,22 @@ const logo = {
           label: 'Speed',
           val: 1000,
           suffix: '',
+        },
+        {
+          id: 'sensor_id',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor id',
+          val: -1,
+          suffix: '',
+        },
+	      {
+          id: 'sensor_val',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor val',
+          val: 1,
+          suffix: '',
         }
       ],
       run(vm, angle) {
@@ -131,6 +147,22 @@ const logo = {
           conv: parseFloat,
           label: 'Speed',
           val: 1000,
+          suffix: '',
+        },
+        {
+          id: 'sensor_id',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor id',
+          val: -1,
+          suffix: '',
+        },
+	      {
+          id: 'sensor_val',
+          type: 'input',
+          conv: parseFloat,
+          label: 'Sensor val',
+          val: 1,
           suffix: '',
         }
       ],

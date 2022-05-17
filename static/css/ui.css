@@ -40,7 +40,7 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 33% auto;
+  grid-template-columns: 25%  40%  auto;
 }
 
 .compiled-block {

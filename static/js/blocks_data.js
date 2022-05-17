@@ -88,30 +88,6 @@ const logo = {
       }
     },
 
-    backward: {
-      color: '#e9c46a',
-      params: [
-        {
-          id: 'distance',
-          type: 'input',
-          conv: parseFloat,
-          label: 'Backward',
-          val: 10,
-          suffix: 'steps',
-        },
-        {
-          id: 'speed',
-          type: 'input',
-          conv: parseFloat,
-          label: 'Speed',
-          val: 1000,
-          suffix: '',
-        }
-      ],
-      run(vm, distance) {
-        vm.cmds.forward.run(vm, -distance);
-      }
-    },
 
     left: {
       color: '#e76f51',

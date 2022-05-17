@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/ui.css">
   <link rel="stylesheet" href="/static/css/blocks.css">
-  <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@6.0.1/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@6.0.1/dist/ionicons/ionicons.js"></script>
   <link rel="stylesheet" href="/static/css/modal.css">
   <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon">
 
@@ -26,6 +26,7 @@
       <div class="panel-toolbar">
         Actions chain
         <div class="panel-toolbar">
+          <ion-icon id="camera" name="camera-outline" class="icon" onclick="updateShotServerReq()"></ion-icon>
           <ion-icon id="settings" name="settings-outline" class="icon"></ion-icon>
           <ion-icon id="load_project" name="cloud-upload-outline" class="icon">
           </ion-icon>
@@ -46,13 +47,21 @@
       <div class="json_source"></div>
       <a class="download_json" style="display:none" onclick="downloadObjectAsJson()">Download json file</a>
       <span class="raw_json" style="display: none;"></span>
-      <div class="panel-toolbar">
-        ARDUINO:
-        <div class="arduino_source">
-
-        </div>
-      </div>
     </div>
+   
+    <div class="compiled-block">
+      <div class="panel-toolbar" id="camera_shot_title">
+        Camera Screenshot {% if not camera %} disabled in server config{% endif %}
+      </div>
+      {% if camera %}
+        <img id="rpi_camera" src="static/imgs/cam.png" width="500" alt="Camera error">
+      {%else %}
+        <img id="rpi_camera" src="static/imgs/camera_off.png" width="200" alt="Server error">
+      {% endif %}
+
+    </div>
+    
+
   </main>
 
   <div id="myModal" class="modal">
@@ -74,10 +83,7 @@
       <h2>RoboBlock settings</h2>
       <p>Language: <a class="setting_link">EN</a> <a class="setting_link">RU</a>
       </p>
-      <div class="flask_addr">
-        <p>Flask addr(IP:PORT): </p>
-        <input type="text" class="flask_addr_input" value="127.0.0.1:5000" autocomplete="off">
-      </div>
+
       <p>Theme: <a class="setting_link">Dark</a> <a class="setting_link" onclick="change_theme()">Light</a>
       </p>
 
@@ -109,6 +115,7 @@
   <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.2/dist/pretty-print-json.dark-mode.css>
   <script src="/static/js/themes.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.5.2/math.js"></script>
+  <script src="/static/js/camera.js"></script>
 
   <!-- Fun; Check OS-->
   <script>
@@ -122,6 +129,8 @@
     }
     window.addEventListener('load', function () {
       check();
+
+
     });
 
   </script>

@@ -30,6 +30,8 @@ function import_project(json_prj_string){
   $("#code-contents").html(obj);
 }
 
+
+
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("load_project");
 var span = document.getElementById("close_modal");
@@ -50,6 +52,11 @@ btn.onclick = function() {
 span.onclick = function() {
   modal_settings.style.display = "none";
 }
+
+
+
+
+
 window.onclick = function(event) {
   if (event.target == modal_settings || event.target == modal) {
     modal_settings.style.display = "none";

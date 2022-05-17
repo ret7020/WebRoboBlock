@@ -1,16 +1,27 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from pyngrok import ngrok
 import spilib
 import telebot
 import json
 import socket
 from custom_python.py_classes import *
+from camera1 import Camera1
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
 if conf["camera_enabled"]:
     import cv2
     
+
+camera1 = Camera1(20, 1)
+camera1.run()
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
+               
 
 class TgPublish:
     def __init__(self) :
@@ -29,7 +40,6 @@ class Camera:
         if ret:
             cv2.imwrite("static/imgs/cam.png", frame_inited)
         self.cap.release()
-
 
 
 class MotorsAPI:
@@ -56,12 +66,25 @@ class MotorsAPI:
 
 app = Flask(__name__)
 
+@app.route("/video_feed1")
+def video_feed1():
+	return Response(gen(camera1),mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 @app.route('/')
 def index():
     if conf["camera_enabled"]:
         camera.take_shot()
     return render_template("index.html", camera=conf["camera_enabled"])
+
+
+@app.after_request
+def add_header(r):
+	r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+	r.headers["Pragma"] = "no-cache"
+	r.headers["Expires"] = "0"
+	r.headers["Cache-Control"] = "public, max-age=0"
+	return r
 
 
 @app.route("/run", methods=["POST"])
@@ -78,11 +101,6 @@ def run():
             pass
     return "1"
 
-@app.route("/camera_shot")
-def shot():
-    if conf["camera_enabled"]:
-        camera.take_shot()
-    return "1"
 
 
 

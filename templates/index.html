@@ -53,11 +53,7 @@
       <div class="panel-toolbar" id="camera_shot_title">
         Camera Screenshot {% if not camera %} disabled in server config{% endif %}
       </div>
-      {% if camera %}
-        <img id="rpi_camera" src="static/imgs/cam.png" width="500" alt="Camera error">
-      {%else %}
-        <img id="rpi_camera" src="static/imgs/camera_off.png" width="200" alt="Server error">
-      {% endif %}
+      <img src="{{ url_for('video_feed1') }}">
 
       <h2>Manual controller</h2>
       <input type="checkbox" style="width: 3%" name="enabled_status" id="enabled_status"><label for="enabled_status">Enabled</label></br></br>

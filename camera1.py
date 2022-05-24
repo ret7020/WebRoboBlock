@@ -38,6 +38,7 @@ class Camera1():
     def get_frame(self, _bytes=True):
         if len(self.frames) > 0:
             if _bytes:
+                self.frames[-1] = cv2.resize(self.frames[-1], (100, 100))
                 img = cv2.imencode('.png', self.frames[-1])[1].tobytes()
             else:
                 img = self.frames[-1]

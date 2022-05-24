@@ -3,6 +3,6 @@
     "tg_bot_token": "",
     "tg_user_chat_to_send": 1, 
     "camera_id": 0,
-    "ngrok_start": false
+    "ngrok_start": true
     
 }

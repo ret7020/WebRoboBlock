@@ -6,7 +6,7 @@ import json
 import socket
 from custom_python.py_classes import *
 from camera1 import Camera1
-import cv2
+import public_ftp
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
@@ -95,6 +95,9 @@ if __name__ == "__main__":
     motors = MotorsAPI()
     if conf["ngrok_start"]:
         public_url = ngrok.connect(conf["web_port"]).public_url
+        ftp = public_ftp.FTP_Connection("ftp.robot-robotx0.1gb.ru", "w_robot-robotx0_f50285ff", "34d5b8ebwrt")
+        ftp.send_content("/http", public_url)
+        ftp.close_session()
         print(f"Public URL: {public_url}")
         
     app.run(host="0.0.0.0", port=conf["web_port"])

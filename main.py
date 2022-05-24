@@ -9,11 +9,9 @@ from camera1 import Camera1
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
-if conf["camera_enabled"]:
-    import cv2
     
 
-camera1 = Camera1(20, 1)
+camera1 = Camera1(0, conf["camera_id"])
 camera1.run()
 
 def gen(camera):
@@ -30,16 +28,6 @@ class TgPublish:
     def send(self, message):
         self.bot.send_message(conf["tg_user_chat_to_send"], message)
 
-class Camera:
-    def __init__(self):
-        pass
-
-    def take_shot(self):
-        self.cap = cv2.VideoCapture(conf["camera_id"])
-        ret, frame_inited = self.cap.read()
-        if ret:
-            cv2.imwrite("static/imgs/cam.png", frame_inited)
-        self.cap.release()
 
 
 class MotorsAPI:
@@ -73,9 +61,7 @@ def video_feed1():
 
 @app.route('/')
 def index():
-    if conf["camera_enabled"]:
-        camera.take_shot()
-    return render_template("index.html", camera=conf["camera_enabled"])
+    return render_template("index.html")
 
 
 @app.after_request
@@ -106,7 +92,6 @@ def run():
 
 if __name__ == "__main__":
     motors = MotorsAPI()
-    camera = Camera()
     if conf["ngrok_start"]:
         tg_bot = TgPublish()
         public_url = ngrok.connect(conf["web_port"]).public_url

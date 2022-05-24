@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>RoboBlock v.1.0.0 [DEV]</title>
+  <title>RoboBlock v.1.5.0 [DEV]</title>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/ui.css">
   <link rel="stylesheet" href="/static/css/blocks.css">
@@ -51,7 +51,7 @@
    
     <div class="compiled-block">
       <div class="panel-toolbar" id="camera_shot_title">
-        Camera Screenshot {% if not camera %} disabled in server config{% endif %}
+        Camera Screenshot
       </div>
       <img src="{{ url_for('video_feed1') }}" width="500">
 
@@ -117,10 +117,7 @@
   <script src="/static/js/controller.js"></script>
 
   <!-- Fun; Check OS-->
-  <script>
-     $("#watermark").css("display", "block");
 
-  </script>
 
 </body>
 

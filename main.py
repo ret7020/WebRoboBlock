@@ -6,17 +6,18 @@ import json
 import socket
 from custom_python.py_classes import *
 from camera1 import Camera1
+import cv2
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
     
 
-camera1 = Camera1(0, conf["camera_id"])
+camera1 = Camera1(20, conf["camera_id"])
 camera1.run()
 
 def gen(camera):
 	while True:
-		frame = camera.get_frame()
+		frame = cv2.resize(camera.get_frame(), (100, 100))
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/png\r\n\r\n' + frame + b'\r\n')
                

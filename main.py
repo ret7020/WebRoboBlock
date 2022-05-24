@@ -94,9 +94,8 @@ def run():
 if __name__ == "__main__":
     motors = MotorsAPI()
     if conf["ngrok_start"]:
-        tg_bot = TgPublish()
         public_url = ngrok.connect(conf["web_port"]).public_url
         print(f"Public URL: {public_url}")
-        tg_bot.send(f"New RoboBlock instance started at:\nLocal: {socket.gethostbyname(socket.gethostname())}\nPublic: {public_url}")
+        
     app.run(host="0.0.0.0", port=conf["web_port"])
     

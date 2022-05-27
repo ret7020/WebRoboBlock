@@ -13,7 +13,8 @@ with open("conf.json", "r") as file:
     
 
 camera1 = Camera1(20, conf["camera_id"])
-camera1.run()
+if conf["camera_enabled"]:
+    camera1.run()
 
 def gen(camera):
 	while True:
@@ -62,7 +63,7 @@ def video_feed1():
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", version=conf["version"])
 
 
 @app.after_request
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     motors = MotorsAPI()
     if conf["ngrok_start"]:
         public_url = ngrok.connect(conf["web_port"]).public_url
-        ftp = public_ftp.FTP_Connection("ftp.robot-robotx0.1gb.ru", "w_robot-robotx0_f50285ff", "34d5b8ebwrt")
+        ftp = public_ftp.FTP_Connection("ftp.robot.", "w_robot-", "")
         ftp.send_content("/http", public_url)
         ftp.close_session()
         print(f"Public URL: {public_url}")

@@ -8,6 +8,7 @@ from custom_python.py_classes import *
 from camera1 import Camera1
 import public_ftp
 import utils
+import time
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
@@ -76,6 +77,8 @@ def stop_program():
     global finish_program
     finish_program = True
     spilib.spi_send([1, 0, 0, 0, 0, 0, 0])
+    spilib.spi_send([1, 0, 0, 0, 0, 0, 0])
+
     print("Stopped")
     return "OK"
 
@@ -103,6 +106,8 @@ def run():
                 eval(step["source"])
             elif step["action"].startswith("threaded_"):
                 pass
+            elif step['action'] == "delay":
+                time.sleep(step["delay"])
         else:
             break
     finish_program = False

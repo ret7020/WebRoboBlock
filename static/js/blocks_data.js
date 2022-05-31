@@ -205,7 +205,7 @@ const logo = {
           conv: parseFloat,
           label: 'Delay',
           val: 30,
-          suffix: 's',
+          suffix: 'ms',
         }
       ],
       run(vm, angle) {
@@ -253,7 +253,28 @@ const logo = {
       ],
       run(vm){
       }
+      },
+
+      delay: {
+        color: '#00ffb7',
+        params: [
+          {
+             id: 'delay',
+             type: 'input',
+             conv: parseInt,
+             label: 'Seconds',
+             val: "3",
+             suffix: 's'
+          },
+         
+        ],
+        run(vm){
+        }
         },
+
+
+
+   
     
 
 

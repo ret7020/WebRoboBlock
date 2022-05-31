@@ -7,11 +7,16 @@ import socket
 from custom_python.py_classes import *
 from camera1 import Camera1
 import public_ftp
+import utils
 
 with open("conf.json", "r") as file:
     conf = json.load(file)
     
+finish_program = False
 
+actual_version = True
+if utils.get_upstream_verion() != conf["version"]:
+    actual_version = False
 camera1 = Camera1(20, conf["camera_id"])
 if conf["camera_enabled"]:
     camera1.run()
@@ -63,8 +68,16 @@ def video_feed1():
 
 @app.route('/')
 def index():
-    return render_template("index.html", version=conf["version"])
+    return render_template("index.html", actual_version=actual_version)
 
+
+@app.route("/stop_program")
+def stop_program():
+    global finish_program
+    finish_program = True
+    spilib.spi_send([1, 0, 0, 0, 0, 0, 0])
+    print("Stopped")
+    return "OK"
 
 @app.after_request
 def add_header(r):
@@ -77,16 +90,22 @@ def add_header(r):
 
 @app.route("/run", methods=["POST"])
 def run():
+    global finish_program
     data = request.json
     for step in data:
-        if step["action"] in ["forward", "backward", "left", "right"]:
-            motors.drive(step)
-        elif step["action"] == "servo":
-            spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"])
-        elif step["action"] == "python":
-            eval(step["source"])
-        elif step["action"].startswith("threaded_"):
-            pass
+        if not finish_program:
+            if step["action"] in ["forward", "backward", "left", "right"]:
+                motors.drive(step)
+                print(step)
+            elif step["action"] == "servo":
+                spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"])
+            elif step["action"] == "python":
+                eval(step["source"])
+            elif step["action"].startswith("threaded_"):
+                pass
+        else:
+            break
+    finish_program = False
     return "1"
 
 

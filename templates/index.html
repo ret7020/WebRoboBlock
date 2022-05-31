@@ -26,7 +26,7 @@
       <div class="panel-toolbar">
         Actions chain
         <div class="panel-toolbar">
-          <ion-icon id="camera" name="camera-outline" class="icon" onclick="updateShotServerReq()"></ion-icon>
+          <ion-icon id="stop_program" name="stop-circle-outline" class="icon" onclick="stop_program()"></ion-icon>
           <ion-icon id="settings" name="settings-outline" class="icon"></ion-icon>
           <ion-icon id="load_project" name="cloud-upload-outline" class="icon">
           </ion-icon>
@@ -88,6 +88,9 @@
       </p>
       <p>Theme: <a class="setting_link">Dark</a> <a class="setting_link" onclick="change_theme()">Light</a>
       </p>
+      {% if not actual_version %}
+        <span style="color:red">You are using old version</span>
+      {% endif %}
 
 
     </div>

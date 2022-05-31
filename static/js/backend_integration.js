@@ -17,3 +17,16 @@ function send_ajax(){
     });
 
 }
+
+function stop_program(){
+    $.ajax({
+        url: "/stop_program",
+        type: "GET",
+        success: function(data){
+            toastr.info('OK');
+        },
+        error: function(error){
+            toastr.error("Fail; Check your local FLASK server.")
+        }
+    });
+}

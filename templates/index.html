@@ -11,12 +11,12 @@
   <script nomodule="" src="https://unpkg.com/ionicons@6.0.1/dist/ionicons/ionicons.js"></script>
   <link rel="stylesheet" href="/static/css/modal.css">
   <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <nav id="menu" class="panel">
-    <div class="panel-toolbar">
+    <div class="panel-toolbar" id="aval_blocks_heading">
       Available blocks
     </div>
     <div id="menu-contents" class="panel-contents"></div>
@@ -40,7 +40,7 @@
       </div>
       <div id="code-contents"></div>
     </div>
-    <div class="compiled-block">
+    <div class="compiled-block" id="json_preview">
       <div class="panel-toolbar">
         JSON:
       </div>
@@ -49,7 +49,7 @@
       <span class="raw_json" style="display: none;"></span>
     </div>
    
-    <div class="compiled-block">
+    <div class="compiled-block" id="screenshot_and_controll">
       <div class="panel-toolbar" id="camera_shot_title">
         Camera Screenshot
       </div>
@@ -118,6 +118,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.5.2/math.js"></script>
   <script src="/static/js/camera.js"></script>
   <script src="/static/js/controller.js"></script>
+  <script src="/static/js/mobile.js"></script>
 
   <!-- Fun; Check OS-->
 

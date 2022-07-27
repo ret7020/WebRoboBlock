@@ -180,3 +180,17 @@ textarea{
   background: #ffffff20; border:none;
   margin-left: 50px;
 }
+
+@media (max-width: 660px) {
+  #json_preview{
+    display: none;
+  }
+  #screenshot_and_controll{
+    display: none;
+  }
+  main{
+    grid-template-columns: 100%;
+  }
+  div[class*="block-field"] { width: 26vw; }
+}
+

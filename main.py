@@ -61,6 +61,7 @@ class MotorsAPI:
         
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @app.route("/video_feed1")
 def video_feed1():

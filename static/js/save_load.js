@@ -4,12 +4,20 @@ function save_project(json_compiled_obj){
 
 function load_project(json_compiled_string){
     var project_data_json = JSON.parse($(".json_content").val());
+    var opts_tmp;
     $.each(project_data_json, function(index, val){
-        console.log(val);
-        var block_def = logo["cmds"][val["action"]];
-        block_def["params"][0]["val"] = val["data"];
-        $("#code-contents").append(createBlock(val["action"], block_def));
+        opts_tmp = logo.cmds[val["action"]];
+        $.each(val, function(arg){
+          if (arg != "action"){
+              opts_tmp["params"][opts_tmp["params"].findIndex(x => x.id == arg)].val = val[arg];
+          }
+        });
+        $("#code-contents").append(createBlock(val["action"], opts_tmp, true, index));
         $("#code-contents").append(createDivider());
+        //var block_def = logo["cmds"][val["action"]];
+        //block_def["params"][0]["val"] = val["data"];
+        //$("#code-contents").append(createBlock(val["action"], block_def));
+        //$("#code-contents").append(createDivider());
     });
     
 }

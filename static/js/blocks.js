@@ -90,15 +90,21 @@ function createBlockParam(param) {
   }
 }
 
-function createBlock(cmd, opts) {
+function createBlock(cmd, opts, auto=false, block_id=-1) {
   const block = document.createElement('div');
   block.id = cmd;
+  if (auto){
+    block.id = `${cmd}${block_id}`;
+  }
   block.setAttribute('data-cmd', cmd);
   block.classList.add('block');
   block.style.borderLeftColor = opts.color || block.style.borderLeftColor;
   block.draggable = true;
   block.setAttribute('ondragstart', 'blockDragStart(event)');
   block.setAttribute('ondragend', 'blockDragEnd(event)'); 
+  if (auto){
+    block.setAttribute("data-instance", "");
+  }
   for (const param of opts.params || []) {
     block.appendChild(createBlockParam(param));
   }

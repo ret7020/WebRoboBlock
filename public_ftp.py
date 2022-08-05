@@ -19,6 +19,6 @@ class FTP_Connection:
 
 if __name__ == "__main__":
     print("Test")
-    ftp = FTP_Connection("ftp.robot-robotx0.1gb.ru", "w_robot-robotx0_f50285ff", "34d5b8ebwrt")
+    ftp = FTP_Connection("ftp", "", "")
     ftp.send_content("/http", "https://ngrok.io/test")
     ftp.close_session()

@@ -2,7 +2,7 @@ function save_project(json_compiled_obj){
     console.log("Not usefull for some time");
 }
 
-function load_project(json_compiled_string){
+function load_project(){
     var project_data_json = JSON.parse($(".json_content").val());
     var opts_tmp;
     $.each(project_data_json, function(index, val){
@@ -14,10 +14,6 @@ function load_project(json_compiled_string){
         });
         $("#code-contents").append(createBlock(val["action"], opts_tmp, true, index));
         $("#code-contents").append(createDivider());
-        //var block_def = logo["cmds"][val["action"]];
-        //block_def["params"][0]["val"] = val["data"];
-        //$("#code-contents").append(createBlock(val["action"], block_def));
-        //$("#code-contents").append(createDivider());
     });
     
 }

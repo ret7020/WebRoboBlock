@@ -48,7 +48,7 @@ def check_sensor(recieved, sensor_id, sensor_val):
         else:
             return False
 
-def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id=-1, sensor_val=None):
+def move_robot(dir, interpreter_control_flag, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id=-1, sensor_val=None):
     '''Moves a robot
 
     Args:
@@ -73,7 +73,7 @@ def move_robot(dir, speed=1000, accel=1000, steps=1000, verbose=False, sensor_id
     received_data = spi_send(send_data)
     time.sleep(0.07)
     #Freeze app until action finish
-    while True:
+    while not interpreter_control_flag:
         recieved = spi_send([])
         if (recieved[0] == 0 and recieved[1] == 0):
             print("Finish")

@@ -262,7 +262,7 @@ const logo = {
              id: 'delay',
              type: 'input',
              conv: parseInt,
-             label: 'Seconds',
+             label: 'Delay',
              val: "3",
              suffix: 's'
           },

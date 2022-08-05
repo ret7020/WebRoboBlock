@@ -1,9 +1,11 @@
 {
     "web_port": 8080,
+    "send_tg_message": 0,
     "tg_bot_token": "",
     "tg_user_chat_to_send": 1, 
     "camera_id": 0,
     "camera_enabled": false,
     "ngrok_start": false,
-    "version": "1.5.0"
+    "version": "1.5.0",
+    "rotate_coef": 40
 }

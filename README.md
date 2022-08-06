@@ -29,6 +29,32 @@ Control RPi robot using scratch-like web interface
 
 6. Play!
 
+## Architecture
+Your code maked from blocks "compiling" to JSON format:
+```
+[
+   {
+      action: "forward",
+      distance: 10,
+      speed: 1000,
+      sensor_id: -1,
+      sensor_val: 1
+   },
+   {
+      action: "forward", 
+      distance: 12,
+      speed: 2000,
+      sensor_id: -1,
+      sensor_val: 1
+   }
+]
+```
+Each block generates block with different arguments(but there is an "action" argument en each)!
+</br>
+After "compiling" you can deploy your code to execution on real robot. IDE(web site) hosted on real robot. When you deploy project compiled json file sended via POST to web server and then this JSON going through interpreter. Each command executed one by one. </br>
+Interpreter code file `interpreter.py` </br>
+Communication with arduino and RPI library [Repo](https://github.com/stepanburmistrov/Raspberry-SPI-Arduino)
+
 ## Configuring
 All settings stored in [conf.json](conf.json) file.
     <pre>

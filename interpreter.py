@@ -1,6 +1,7 @@
 import spilib
 import time
 
+
 class MotorsAPI:
     '''
     This class works with motors on high level
@@ -30,25 +31,36 @@ class MotorsAPI:
             time.sleep(4) # Fake execution time
         
 class Interpreter:
-    def __init__(self, motors_driver):
+    '''
+    Main interpreter class
+    This class execute code(JSON file) line by line
+    '''
+    def __init__(self, motors_driver, logger):
         self.finish_program = False # Interrupt program execution flag
         self.motors_driver = motors_driver
+        self.logger = logger
 
     def interpret(self, data):
+        self.logger.start_execution()
         for step in data:
             if not self.finish_program:
                 print(step)
-                if step["action"] in ["forward", "backward", "left", "right"]:
+                if step["action"] in ["forward", "left", "right"]:
+                    self.logger.write_entry(f"Motors {step['action']}")
                     self.motors_driver.drive(step)
                     #print(step) LOGGER
                 elif step["action"] == "servo":
+                    self.logger.write_entry(f"Servo action: {step['num']} steps")
                     spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"]) # Servo works without driver wrapper like motors
                 elif step["action"] == "python": # Execute custom python code from custom_python
+                    self.logger.write_entry("Python code")
                     eval(step["source"])
                 elif step["action"].startswith("threaded_"): # Multithreading on interpretation level (NOT fully implemented yet)
                     pass
                 elif step['action'] == "delay": # Delay on interpretation level
+                    self.logger.write_entry(f"Delay {step['delay']}")
                     time.sleep(step["delay"])
             else: # Interrupt execution (used for emergency stop)
                 break
         self.finish_program = False # Toggle back interruption flag
+        self.logger.finish_execution()

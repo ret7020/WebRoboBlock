@@ -9,7 +9,7 @@ import public_ftp
 import utils
 import time
 import interpreter
-
+from logger import Logger
 
 
 app = Flask(__name__)
@@ -71,8 +71,9 @@ if __name__ == "__main__":
     if conf["camera_enabled"]:
         camera1.run()
 
+    logger = Logger(conf["log_dir"])
     motors_driver = interpreter.MotorsAPI(rotate_coef=conf["rotate_coef"])
-    interpr = interpreter.Interpreter(motors_driver)
+    interpr = interpreter.Interpreter(motors_driver, logger)
 
     if conf["ngrok_start"]:
         public_url = ngrok.connect(conf["web_port"]).public_url
@@ -83,5 +84,7 @@ if __name__ == "__main__":
         if conf["send_tg_message"]:
             tg_bot = utils.TgPublish(conf["tg_bot_token"])
             tg_bot.send(f"App started with public url {public_url}")
-        
+    
+    
+    logger.write_entry("Application started")
     app.run(host="0.0.0.0", port=conf["web_port"])

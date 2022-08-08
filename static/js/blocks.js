@@ -5,9 +5,9 @@ function isBlock(elem) {
 function childBlocks(slot) {
   const kids = [];
   for (const child of slot.children) {
-    if (isBlock(child)) {
-      kids.push(child);
-    }
+	if (isBlock(child)) {
+	  kids.push(child);
+	}
   }
   return kids;
 }
@@ -24,7 +24,11 @@ function createInput(param) {
   
   const block = document.createElement('div');
   block.classList.add('block-arg');
-  block.appendChild(document.createTextNode(param.label));
+
+  const label_span = document.createElement('span');
+  label_span.innerText = param.label;
+  block.appendChild(label_span);
+  
   block.appendChild(field);
   return block;
 }
@@ -79,14 +83,14 @@ function createLabel(param) {
 
 function createBlockParam(param) {
   switch (param.type) {
-    case 'input':
-      return createInput(param);
-    case 'color':
-      return createColorInput(param);
-    case 'slot':
-      return createSlot(param);
-    default:
-      return createLabel(param);
+	case 'input':
+	  return createInput(param);
+	case 'color':
+	  return createColorInput(param);
+	case 'slot':
+	  return createSlot(param);
+	default:
+	  return createLabel(param);
   }
 }
 
@@ -94,26 +98,27 @@ function createBlock(cmd, opts, auto=false, block_id=-1) {
   const block = document.createElement('div');
   block.id = cmd;
   if (auto){
-    block.id = `${cmd}${block_id}`;
+	block.id = `${cmd}${block_id}`;
   }
   block.setAttribute('data-cmd', cmd);
+  block.setAttribute('data-i18n-block', cmd);
   block.classList.add('block');
   block.style.borderLeftColor = opts.color || block.style.borderLeftColor;
   block.draggable = true;
   block.setAttribute('ondragstart', 'blockDragStart(event)');
   block.setAttribute('ondragend', 'blockDragEnd(event)'); 
   if (auto){
-    block.setAttribute("data-instance", "");
+	block.setAttribute("data-instance", "");
   }
   for (const param of opts.params || []) {
-    block.appendChild(createBlockParam(param));
+	block.appendChild(createBlockParam(param));
   }
   return block;
 }
 
 function addBlocks(container, cmds) {
   for (const [cmd, opts] of Object.entries(cmds)) {
-    container.appendChild(createBlock(cmd, opts));
-    
+	container.appendChild(createBlock(cmd, opts));
+	
   }
 }

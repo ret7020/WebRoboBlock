@@ -84,10 +84,10 @@
   <div id="settinsgModal" class="modal">
     <div class="modal-content">
       <span id="close_settings" class="close">&times</span>
-      <h2>RoboBlock settings</h2>
-      <p>Language: <a class="setting_link">EN</a> <a class="setting_link">RU</a>
+      <h2>RoboBlock <span data-i18n-key="settings">settings</span></h2>
+      <p><span data-i18n-key="language">Language</span>: <a class="setting_link" onclick="switch_language()">EN</a> <a class="setting_link" onclick="switch_language('ru')">RU</a>
       </p>
-      <p>Theme: <a class="setting_link">Dark</a> <a class="setting_link" onclick="change_theme()">Light</a>
+      <p><span data-i18n-key="theme_switcher">Theme</span>: <a class="setting_link" data-i18n-key="dark_theme_switch">Dark</a> <a class="setting_link" onclick="change_theme()" data-i18n-key="light_theme_switch">Light</a>
       </p>
       {% if not actual_version %}
         <span style="color:red">You are using old version</span>

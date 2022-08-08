@@ -1,8 +1,11 @@
 # WebRoboBlock
-Control RPi robot using scratch-like web interface
+Control RPi robot using scratch-like(visual programming) web interface.
+![image](https://user-images.githubusercontent.com/55328925/183447593-72934ad3-b645-4cbc-885c-8eb9cb0aa335.png)
+
+
 
 ## Installation
-1. Clone repository to your RPI
+1. Clone repository to your RPi
 
     ```
     git clone https://github.com/ret7020/WebRoboBlock

@@ -22,7 +22,7 @@ function export_as_html(){
   var source = $("#code-contents").clone();
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(source));
   var downloadAnchorNode = document.createElement('a');
-  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("href", dataStr);
   downloadAnchorNode.setAttribute("download", "project.html");
   document.body.appendChild(downloadAnchorNode); // required for firefox
   downloadAnchorNode.click();
@@ -56,8 +56,6 @@ btn.onclick = function() {
 span.onclick = function() {
   modal_settings.style.display = "none";
 }
-
-
 
 
 

@@ -8,7 +8,7 @@ const logo = {
     env.ctx.strokeStyle = '#ffffff';
     env.ctx.moveTo(env.x, env.y);
   },
-  
+
   cmds: {
     repeat: {
       color: '#0ebeff',
@@ -25,13 +25,13 @@ const logo = {
           type: 'slot',
         }
       ],
-      run(vm, times, blocks) {        
+      run(vm, times, blocks) {
         var final_iter = [];
-        for (let i = 0; i < times; i++) { 
-          $.each(vm.runSeq(blocks), function(index, val){
+        for (let i = 0; i < times; i++) {
+          $.each(vm.runSeq(blocks), function (index, val) {
             final_iter.push(val);
           });
-          
+
         }
         return final_iter;
       },
@@ -56,7 +56,7 @@ const logo = {
           val: 1000,
           suffix: '',
         },
-	      {
+        {
           id: 'sensor_id',
           type: 'input',
           conv: parseFloat,
@@ -64,7 +64,7 @@ const logo = {
           val: -1,
           suffix: '',
         },
-	      {
+        {
           id: 'sensor_val',
           type: 'input',
           conv: parseFloat,
@@ -74,7 +74,8 @@ const logo = {
         }
       ],
       run(vm, distance) {
-        const sx = vm.env.x;
+        // Not used for now
+        /*const sx = vm.env.x;
         const sy = vm.env.y;
         const rad = vm.env.direction * Math.PI / 180;
         vm.env.x += distance * Math.cos(rad);
@@ -84,7 +85,7 @@ const logo = {
           vm.env.ctx.moveTo(sx, sy);
           vm.env.ctx.lineTo(vm.env.x, vm.env.y);
           vm.env.ctx.stroke();
-        }
+        } */
       }
     },
 
@@ -116,7 +117,7 @@ const logo = {
           val: -1,
           suffix: '',
         },
-	      {
+        {
           id: 'sensor_val',
           type: 'input',
           conv: parseFloat,
@@ -157,7 +158,7 @@ const logo = {
           val: -1,
           suffix: '',
         },
-	      {
+        {
           id: 'sensor_val',
           type: 'input',
           conv: parseFloat,
@@ -199,7 +200,7 @@ const logo = {
           val: 60,
           suffix: '°',
         },
-	      {
+        {
           id: 'delay',
           type: 'input',
           conv: parseFloat,
@@ -242,66 +243,56 @@ const logo = {
       color: 'green',
       params: [
         {
-           id: 'source',
-           type: 'input',
-           conv: parseInt,
-           label: 'Code',
-           val: "Test code",
-           suffix: ''
+          id: 'source',
+          type: 'input',
+          conv: parseInt,
+          label: 'Code',
+          val: "Test code",
+          suffix: ''
         },
-       
+
       ],
-      run(vm){
-      }
-      },
+      run(vm) {}
+    },
 
-      delay: {
-        color: '#00ffb7',
-        params: [
-          {
-             id: 'delay',
-             type: 'input',
-             conv: parseInt,
-             label: 'Delay',
-             val: "3",
-             suffix: 's'
-          },
-         
-        ],
-        run(vm){
-        }
+    delay: {
+      color: '#00ffb7',
+      params: [
+        {
+          id: 'delay',
+          type: 'input',
+          conv: parseInt,
+          label: 'Delay',
+          val: "3",
+          suffix: 's'
         },
 
+      ],
+      run(vm) {
+      }
+    },
+    init_var: { // Not implemented in backend yet
+      color: 'red',
+      params: [
+        {
+          id: 'var_name',
+          type: 'input',
+          conv: parseInt,
+          label: 'Var name',
+          val: "var_1",
+          suffix: ''
+        },
+        {
+          id: "var_value",
+          type: "input",
+          conv: parseInt,
+          label: 'Var value',
+          val: 0,
+          suffix: ''
 
-
-   
-    
-
-
-  init_var: {
-	color: 'red',
-	params: [
-	  {
-	     id: 'var_name',
-	     type: 'input',
-	     conv: parseInt,
-	     label: 'Var name',
-	     val: "var_1",
-	     suffix: ''
-	  },
-	  {
-	     id: "var_value",
-	     type: "input",
-	     conv: parseInt,
-	     label: 'Var value',
-	     
-	  }
-	],
-	run(vm){
-	}
+        }
+      ],
+      run(vm) {}
     }
-
-    
-
- }
+  }
 };

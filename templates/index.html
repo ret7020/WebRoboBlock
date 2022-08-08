@@ -16,7 +16,7 @@
 
 <body>
   <nav id="menu" class="panel">
-    <div class="panel-toolbar" id="aval_blocks_heading">
+    <div class="panel-toolbar" id="aval_blocks_heading" data-i18n-key="aval_blocks_heading">
       Available blocks
     </div>
     <div id="menu-contents" class="panel-contents"></div>
@@ -24,7 +24,7 @@
   <main>
     <div id="code" class="panel">
       <div class="panel-toolbar">
-        Actions chain
+        <span data-i18n-key="actions_chain">Actions chain</span>
         <div class="panel-toolbar">
           <ion-icon id="stop_program" name="stop-circle-outline" class="icon" onclick="stop_program()"></ion-icon>
           <ion-icon id="settings" name="settings-outline" class="icon"></ion-icon>
@@ -45,19 +45,19 @@
         JSON:
       </div>
       <div class="json_source"></div>
-      <a class="download_json" style="display:none" onclick="downloadObjectAsJson()">Download json file</a>
+      <a class="download_json" style="display:none" onclick="downloadObjectAsJson()" data-i18n-key="download_json">Download json file</a>
       <span class="raw_json" style="display: none;"></span>
     </div>
    
     <div class="compiled-block" id="screenshot_and_controll">
-      <div class="panel-toolbar" id="camera_shot_title">
-        Camera Screenshot (Disabled while dev)
+      <div class="panel-toolbar" id="camera_shot_title" data-i18n-key="camera_shot_title">
+        Camera Video (Disabled while dev)
       </div>
       <!--<img src="{{ url_for('video_feed1') }}" width="500">-->
 
 
-      <h2>Manual controller</h2>
-      <input type="checkbox" style="width: 3%" name="enabled_status" id="enabled_status"><label for="enabled_status">Enabled</label></br></br>
+      <h2 data-i18n-key="manual_controller">Manual controller</h2>
+      <input type="checkbox" style="width: 3%" name="enabled_status" id="enabled_status"><label for="enabled_status" data-i18n-key="manual_enabled">Enabled</label></br></br>
       <button class="controller_btn" style="margin-left: 90px" onclick="send_direction('forward', 1000)"><ion-icon name="caret-up-outline" class="icon"></ion-icon></button></br>
       <button class="controller_btn" onclick="send_direction('left', 90)"><ion-icon name="caret-back-outline" class="icon"></ion-icon></button>
       <button class="controller_btn" style="margin-left: 32px" onclick="send_direction('right', 90)"><ion-icon name="caret-forward-outline" class="icon"></ion-icon></button>
@@ -120,6 +120,7 @@
   <script src="/static/js/camera.js"></script>
   <script src="/static/js/controller.js"></script>
   <script src="/static/js/mobile.js"></script>
+  <script src="static/js/translations.js"></script>
 
   <!-- Fun; Check OS-->
 

@@ -28,7 +28,7 @@ class MotorsAPI:
         try: # FIXIT USED HERE ONLY WHILE LOCAL PC DEVELOPMENT
             spilib.move_robot(action, self.interpreter_controller_flag, speed=speed, steps=steps_cnt, sensor_id=sensor_id, sensor_val=sensor_val)
         except:
-            time.sleep(4) # Fake execution time
+            time.sleep(2) # Fake execution time
         
 class Interpreter:
     '''
@@ -40,35 +40,59 @@ class Interpreter:
         self.motors_driver = motors_driver
         self.logger = logger
         self.execution_vars = {} # Execution session data container
+        self.curr_if_stack = [0, -1] # (if_id, execution_status)
+        # Execution status variants:
+        # -1: if not assign(no loop, execution works)
+        # 0: false if(no execution works until if finished with endif)
+        # 1: true execution enabled if var is true(1, True, true)
 
     def interpret(self, data):
         self.logger.start_execution()
         self.execution_vars = {} # Clear session data
         for step in data:
             if not self.finish_program:
-                print(step)
-                if step["action"] in ["forward", "left", "right"]:
-                    self.logger.write_entry(f"Motors {step['action']}")
-                    self.motors_driver.drive(step)
-                    #print(step) LOGGER
-                elif step["action"] == "servo":
-                    self.logger.write_entry(f"Servo action: {step['num']} steps")
-                    spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"]) # Servo works without driver wrapper like motors
-                elif step["action"] == "python": # Execute custom python code from custom_python
-                    self.logger.write_entry("Python code")
-                    eval(step["source"])
-                elif step["action"].startswith("threaded_"): # Multithreading on interpretation level (NOT fully implemented yet)
-                    pass
-                elif step['action'] == "delay": # Delay on interpretation level
-                    self.logger.write_entry(f"Delay {step['delay']}")
-                    time.sleep(step["delay"])
-                elif step['action'] == "init_var":
-                    self.execution_vars[step['var_name']] = step['var_value']
-                elif step['action'] == "set_var":
-                    if step['var_name'] in self.execution_vars:
+                if self.curr_if_stack[1] in [-1, 1] or step['action'] == 'endif':
+                    if step["action"] in ["forward", "left", "right"]:
+                        self.logger.write_entry(f"Motors {step['action']}")
+                        self.motors_driver.drive(step)
+                        #print(step) LOGGER
+                    elif step["action"] == "servo":
+                        self.logger.write_entry(f"Servo action: {step['num']} steps")
+                        #spilib.move_servo(step["num"], step["start_angle"], step["finish_angle"], step["delay"]) # Servo works without driver wrapper like motors
+                    elif step["action"] == "python": # Execute custom python code from custom_python
+                        self.logger.write_entry("Python code")
+                        eval(step["source"])
+                    elif step["action"].startswith("threaded_"): # Multithreading on interpretation level (NOT fully implemented yet)
+                        pass
+                    elif step['action'] == "delay": # Delay on interpretation level
+                        self.logger.write_entry(f"Delay {step['delay']}")
+                        time.sleep(step["delay"])
+                    elif step['action'] == "init_var":
                         self.execution_vars[step['var_name']] = step['var_value']
+                    elif step['action'] == "set_var":
+                        if step['var_name'] in self.execution_vars:
+                            self.execution_vars[step['var_name']] = step['var_value']
+                    elif step['action'] == 'if':
+                        # Assign if
+                        var_to_check = step['check_var']
+                        if var_to_check in self.execution_vars:
+                            if self.execution_vars[var_to_check] in ["1", "True", "true", 1]:
+                                self.curr_if_stack[1] = 1
+                                self.curr_if_stack[0] = step['if_id']
+                            else:
+                                self.curr_if_stack[1] = 0
+                                self.curr_if_stack[0] = step['if_id']
+                        else:
+                            self.curr_if_stack[1] = 0 # Deny if execution
+                    elif step['action'] == "endif": # Finish checking
+                        self.curr_if_stack[1] = -1
+                        self.curr_if_stack[0] = 0
             else: # Interrupt execution (used for emergency stop)
                 break
         self.finish_program = False # Toggle back interruption flag
+        # Clear if stack
+        self.curr_if_stack[0] = 0
+        self.curr_if_stack[1] = -1
+        # Finish logger 
         self.logger.finish_execution()
         print(self.execution_vars)

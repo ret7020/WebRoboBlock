@@ -44,7 +44,7 @@ const logo = {
           id: 'var_check',
           type: 'input',
           conv: parseInt,
-          label: 'IF(Does not work)',
+          label: 'IF(Beta)',
           val: 'var_1',
           suffix: '',
         }, {

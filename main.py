@@ -67,8 +67,9 @@ if __name__ == "__main__":
     actual_version = True
     if utils.get_upstream_verion() != conf["version"]:
         actual_version = False
-    camera1 = Camera1(20, conf["camera_id"])
+    
     if conf["camera_enabled"]:
+        camera1 = Camera1(20, conf["camera_id"])
         camera1.run()
 
     logger = Logger(conf["log_dir"])

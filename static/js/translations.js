@@ -60,7 +60,7 @@ function translateBlocks(element, lang_code="en"){
     let norm_ind = 0;
     $.each(params, function(index, param){
         if($(param)[0].className == "block-arg"){
-            $(param)[0].innerText = block_translations[block_type][lang_code][norm_ind];
+            $(param).children()[0].innerText = block_translations[block_type][lang_code][norm_ind];
             norm_ind += 1;
         }
     });

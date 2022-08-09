@@ -3,3 +3,4 @@ flask
 pyTelegramBotAPI
 opencv-python
 spidev
+requests

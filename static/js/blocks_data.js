@@ -37,6 +37,34 @@ const logo = {
       },
     },
 
+    if: {
+      color: '#b37635',
+      params: [
+        {
+          id: 'var_check',
+          type: 'input',
+          conv: parseInt,
+          label: 'IF(Does not work)',
+          val: 'var_1',
+          suffix: '',
+        }, {
+          id: 'body',
+          type: 'slot',
+        }
+      ],
+      run(vm, times, blocks) {
+        var final_iter = [];
+        for (let i = 0; i < times; i++) {
+          $.each(vm.runSeq(blocks), function (index, val) {
+            final_iter.push(val);
+          });
+
+        }
+        return final_iter;
+      },
+    },
+
+
     forward: {
       color: '#e9c46a',
       params: [
@@ -132,7 +160,7 @@ const logo = {
     },
 
     right: {
-      color: '#e76f51',
+      color: '#5039bf',
       params: [
         {
           id: 'angle',
@@ -271,7 +299,7 @@ const logo = {
       run(vm) {
       }
     },
-    init_var: { // Not implemented in backend yet
+    init_var: { 
       color: 'red',
       params: [
         {
@@ -288,6 +316,29 @@ const logo = {
           conv: parseInt,
           label: 'Var value',
           val: 0,
+          suffix: ''
+
+        }
+      ],
+      run(vm) {}
+    },
+    set_var: { // Not implemented in backend yet
+      color: '#b36c6c',
+      params: [
+        {
+          id: 'var_name',
+          type: 'input',
+          conv: parseInt,
+          label: 'Change var',
+          val: "var_1",
+          suffix: ''
+        },
+        {
+          id: "var_value",
+          type: "input",
+          conv: parseInt,
+          label: 'New var value',
+          val: 15,
           suffix: ''
 
         }

@@ -39,9 +39,11 @@ class Interpreter:
         self.finish_program = False # Interrupt program execution flag
         self.motors_driver = motors_driver
         self.logger = logger
+        self.execution_vars = {} # Execution session data container
 
     def interpret(self, data):
         self.logger.start_execution()
+        self.execution_vars = {} # Clear session data
         for step in data:
             if not self.finish_program:
                 print(step)
@@ -60,7 +62,13 @@ class Interpreter:
                 elif step['action'] == "delay": # Delay on interpretation level
                     self.logger.write_entry(f"Delay {step['delay']}")
                     time.sleep(step["delay"])
+                elif step['action'] == "init_var":
+                    self.execution_vars[step['var_name']] = step['var_value']
+                elif step['action'] == "set_var":
+                    if step['var_name'] in self.execution_vars:
+                        self.execution_vars[step['var_name']] = step['var_value']
             else: # Interrupt execution (used for emergency stop)
                 break
         self.finish_program = False # Toggle back interruption flag
         self.logger.finish_execution()
+        print(self.execution_vars)

@@ -37,6 +37,18 @@ const block_translations = {
     "forward": {
         "en": ["Forward", "Speed", "Sensor id", "Sensor val"],
         "ru": ["Вперёд", "Скорость", "Датчик", "Значение датчика"]
+    },
+    "left": {
+        "en": ["Rotate left", "Speed", "Sensor id", "Sensor val"],
+        "ru": ["Поворот налево", "Скорость", "Датчик", "Значение датчика"]
+    },
+    "right": {
+        "en": ["Rotate right", "Speed", "Sensor id", "Sensor val"],
+        "ru": ["Поворот направо", "Скорость", "Датчик", "Значение датчика"]
+    },
+    "servo": {
+        "en": ["Servo number", "Start angle", "Finish angle", "Delay"],
+        "ru": ["Номер сервы", "Начальный угол", "Конечный угол", "Интервал"]
     }
 }
 
@@ -45,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Translate UI items
     document.querySelectorAll("[data-i18n-key]").forEach(function(el){translateElement(el, "en")}); // en - default lang
     // Translate blocks content
-    document.querySelectorAll("[data-i18n-block]").forEach(function(el){translateBlocks(el, "ru")}); // en - default lang
+    document.querySelectorAll("[data-i18n-block]").forEach(function(el){translateBlocks(el, "en")}); // en - default lang
 });
 
 function translateElement(element, lang_code="en") {
@@ -55,15 +67,18 @@ function translateElement(element, lang_code="en") {
 }
 
 function translateBlocks(element, lang_code="en"){
-    const block_type = element.getAttribute("data-i18n-block");
-    const params = $(element).children();
-    let norm_ind = 0;
-    $.each(params, function(index, param){
-        if($(param)[0].className == "block-arg"){
-            $(param).children()[0].innerText = block_translations[block_type][lang_code][norm_ind];
-            norm_ind += 1;
-        }
-    });
+    try{
+        const block_type = element.getAttribute("data-i18n-block");
+        const params = $(element).children();
+        let norm_ind = 0;
+        $.each(params, function(index, param){
+            if($(param)[0].className == "block-arg"){
+                $(param).children()[0].innerText = block_translations[block_type][lang_code][norm_ind];
+                norm_ind += 1;
+            }
+        });
+    }catch{}
+    
 }
 
 function switch_language(lang="en"){

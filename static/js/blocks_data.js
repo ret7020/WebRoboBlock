@@ -54,12 +54,10 @@ const logo = {
       ],
       run(vm, times, blocks) {
         var final_iter = [];
-        for (let i = 0; i < times; i++) {
+        
           $.each(vm.runSeq(blocks), function (index, val) {
             final_iter.push(val);
           });
-
-        }
         return final_iter;
       },
     },

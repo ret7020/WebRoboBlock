@@ -32,9 +32,11 @@ const vm = {
   runSeq(blocks) { // Refractor this part (for loop support is badly implemented)
     var json_compiled = [];
     var temp_block_dt;
+    var if_counter = 0;
     for (const block of blocks) {
       if (block.hasAttribute('data-cmd')) {
         temp_block_dt = this.run(block);
+        
         if (temp_block_dt != null) {
           if (temp_block_dt[0] == "single") {
             var el = {};
@@ -49,6 +51,13 @@ const vm = {
             $.each(temp_block_dt[1], function (index, val) {
               json_compiled.push(val);
             });
+          } else if (temp_block_dt[0] == "if") {
+            json_compiled.push({"action": "if", "if_id": if_counter, "check_var": temp_block_dt[2]});
+            $.each(temp_block_dt[1], function (index, val) {
+              json_compiled.push(val);
+            });
+            json_compiled.push({"action": "endif", "if_id": if_counter});
+            if_counter++;
           }
         }
       }
@@ -85,11 +94,14 @@ const vm = {
 
     }
 
-    if (cmd != "repeat") {
+    if (cmd != "repeat" && cmd != "if") {
       return ["single", { "action": cmd, "data": params_names }];
-    } else {
+    } else if (cmd == "repeat") {
       var final_iter = this.cmds[cmd].run(this, ...args);
       return ["multiple", final_iter];
+    } else if (cmd == "if"){
+      var final_iter = this.cmds[cmd].run(this, ...args);
+      return ["if", final_iter, params_names[0]["var_check"]];
     }
 
 
